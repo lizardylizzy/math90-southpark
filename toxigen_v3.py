@@ -4,7 +4,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 # Create output directory if it doesn't exist
-output_dir = "output_chunks"
+output_dir = "toxigenv3_outputs"
 os.makedirs(output_dir, exist_ok=True)
 
 # getting data
