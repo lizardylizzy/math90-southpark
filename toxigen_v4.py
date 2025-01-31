@@ -4,6 +4,8 @@ import pandas as pd
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
+# theoretically conda env doesn't change bc os and argparse are built in...
+
 # Create output directory if it doesn't exist
 output_dir = "toxigenv4_outputs"
 os.makedirs(output_dir, exist_ok=True)

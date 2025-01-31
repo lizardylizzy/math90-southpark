@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#SBATCH -J test01
+#SBATCH -o test-slurm.txt
+#SBATCH -e test-slurm-errorlog.txt
+#SBATCH -p gpuq
+#SBATCH --gres=gpu:nvidia_a100_80gb_pcie_3g.40gb:1
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --time=6:00:00
+
+python load.py
