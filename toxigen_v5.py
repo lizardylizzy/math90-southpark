@@ -1,7 +1,7 @@
 import pandas as pd
 import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
-
+import string
 
 # getting data
 url = 'https://github.com/BobAdamsEE/SouthParkData/blob/master/All-seasons.csv?raw=true'
@@ -10,9 +10,20 @@ df = pd.read_csv(url)
 # get rid of new lines
 df["Line"] = df["Line"].str.replace('\n', '', regex=True)
 
-# replace fillers
+# make lower case
+df["Line"] = df["Line"].str.lower()
+
+# remove punctuation
+def remove_punctuation(text):
+    translator = str.maketrans('', '', string.punctuation)
+    return text.translate(translator)
+
+df['Line'] = df['Line'].apply(remove_punctuation)
+
+# remove fillers
 df["Line"] = df["Line"].str.replace('uh', '', regex=True)
 df["Line"] = df["Line"].str.replace('um', '', regex=True)
+
 
 # get lines as list
 probs = []
