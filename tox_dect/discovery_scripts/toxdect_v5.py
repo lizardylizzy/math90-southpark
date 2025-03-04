@@ -34,11 +34,9 @@ model = AutoModelForSequenceClassification.from_pretrained('Xuhui/ToxDect-robert
 
 for line in df["Line"]:
     input = tokenizer(line, return_tensors="pt")["input_ids"]
-    #if len(input["input_ids"]) < 115:
     logit = model(input).logits
     prob = 100 * float(torch.softmax(logit, dim=1)[:, 1].detach().numpy())
     probs.append(prob)
-    break
 
 # combine probabilities back with season/ep/char data, save
 df_lines = df.copy()
